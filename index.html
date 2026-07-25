@@ -1,0 +1,393 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>基于用户洞察的增长思路 | 青未了</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#faf6eb;color:#4A4A5A;font-family:'Noto Sans SC',-apple-system,'PingFang SC','Helvetica Neue',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden}
+:root{--blue:#6C9BCF;--blue-light:#8bb4e0;--blue-dark:#4a7aad;--yellow:#FFD166;--yellow-light:#ffe08a;--lavender:#ADB9CF;--cream:#faf6eb;--cream-dark:#f0e6d2;--dark:#151821;--dark-text:#e2e8f0;--text:#4A4A5A;--text-dark:#2d2d3a;--text-light:#888;--max-w:1300px;--gap-section:clamp(80px,12vh,160px);--gap-content:clamp(40px,6vw,100px);--gap-elem:clamp(24px,3vw,48px)}
+::selection{background:#FFD166;color:#1a1a1a}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 2rem}
+.section-label{display:inline-flex;align-items:center;gap:8px;font-family:'Fraunces',serif;font-size:clamp(0.7rem,1vw,0.85rem);letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:clamp(12px,2vw,20px)}
+.section-label::before{content:"";display:block;width:clamp(20px,3vw,36px);height:2px;background:var(--yellow)}
+.section-title{font-family:'Noto Serif SC',serif;font-weight:700;font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.3;color:var(--text-dark);margin-bottom:clamp(16px,2vw,28px)}
+.section-subtitle{font-size:clamp(0.9rem,1.4vw,1.05rem);color:var(--text-light);max-width:640px;line-height:1.7}
+.deco-number{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(3rem,8vw,7rem);line-height:1;color:var(--blue);opacity:0.12;user-select:none}
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.25,0.46,0.45,0.94)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 0.55fr;align-items:center;gap:48px;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-40%;right:-20%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(108,155,207,0.06),transparent 70%);pointer-events:none}
+.hero-text{position:relative;z-index:1;padding-left:clamp(0rem,4vw,4rem)}
+.hero-label{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:clamp(0.7rem,1vw,0.85rem);letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:1.5rem}
+.hero-label::before{content:"";display:block;width:36px;height:2px;background:var(--yellow)}
+.hero h1{font-family:'Noto Serif SC',serif;font-weight:900;font-size:clamp(2.2rem,6vw,4.5rem);line-height:1.15;color:var(--text-dark);margin-bottom:1.2rem}
+.hero h1 .highlight{color:var(--blue)}
+.hero p{font-size:clamp(0.95rem,1.4vw,1.1rem);color:var(--text-light);line-height:1.8;max-width:520px;margin-bottom:2rem}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2rem}
+.hero-tag{display:inline-block;padding:4px 14px;background:rgba(108,155,207,0.1);color:var(--blue);font-size:0.78rem;border-radius:20px;font-family:'Fraunces',serif;letter-spacing:0.02em}
+.hero-visual{display:flex;align-items:center;justify-content:center;position:relative}
+.hero-avatar-wrap{width:clamp(140px,22vw,260px);height:clamp(140px,22vw,260px);border-radius:50%;overflow:hidden;border:3px solid var(--yellow);box-shadow:0 8px 40px rgba(108,155,207,0.15);position:relative}
+.hero-avatar-wrap img{width:100%;height:100%;object-fit:cover}
+.hero-deco-circle{position:absolute;width:clamp(180px,28vw,320px);height:clamp(180px,28vw,320px);border-radius:50%;border:2px dashed var(--lavender);opacity:0.3;animation:spin 40s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-deco-circle2{position:absolute;width:clamp(220px,34vw,400px);height:clamp(220px,34vw,400px);border-radius:50%;border:1px solid var(--yellow);opacity:0.15;animation:spin 30s linear infinite reverse;pointer-events:none}
+.hero-scroll{position:absolute;bottom:2rem;left:clamp(0rem,4vw,4rem);display:flex;align-items:center;gap:8px;font-family:'Fraunces',serif;font-size:0.7rem;color:var(--lavender);letter-spacing:0.15em;text-transform:uppercase}
+.hero-scroll-line{width:40px;height:1px;background:var(--lavender)}
+.judgment{padding:var(--gap-section) 0}
+.judgment-header{margin-bottom:var(--gap-content)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.5vw,32px)}
+.feature-card{background:#fff;border-radius:12px;padding:clamp(28px,3vw,44px);box-shadow:0 2px 16px rgba(0,0,0,0.04);transition:transform 0.3s ease,box-shadow 0.3s ease;position:relative;overflow:hidden}
+.feature-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,0.06)}
+.feature-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.feature-card:nth-child(1)::before{background:var(--blue)}
+.feature-card:nth-child(2)::before{background:var(--yellow)}
+.feature-card:nth-child(3)::before{background:var(--lavender)}
+.feature-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.2rem}
+.feature-card:nth-child(1) .feature-icon{background:rgba(108,155,207,0.1);color:var(--blue)}
+.feature-card:nth-child(2) .feature-icon{background:rgba(255,209,102,0.2);color:#b8942e}
+.feature-card:nth-child(3) .feature-icon{background:rgba(173,185,207,0.15);color:var(--lavender)}
+.feature-card h3{font-family:'Noto Serif SC',serif;font-weight:600;font-size:clamp(1.05rem,1.4vw,1.2rem);color:var(--text-dark);margin-bottom:0.6rem}
+.feature-card p{font-size:clamp(0.82rem,1vw,0.9rem);color:var(--text-light);line-height:1.7}
+.benchmark{min-height:80vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;background:var(--cream-dark)}
+.benchmark-left{display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,6vw,80px);position:relative}
+.benchmark-left .deco-number{position:absolute;top:clamp(20px,3vw,40px);right:clamp(20px,3vw,40px)}
+.benchmark-left h2{font-family:'Noto Serif SC',serif;font-weight:900;font-size:clamp(1.8rem,4vw,3rem);line-height:1.25;color:var(--text-dark);margin-bottom:1rem}
+.benchmark-desc{color:var(--text-light);font-size:clamp(0.85rem,1.2vw,0.95rem);line-height:1.7;max-width:420px}
+.benchmark-right{display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,6vw,80px);gap:clamp(24px,3vw,40px)}
+.benchmark-item{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.benchmark-num{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:0.85rem;flex-shrink:0;margin-top:2px}
+.benchmark-item-content h4{font-family:'Noto Serif SC',serif;font-weight:600;font-size:clamp(0.95rem,1.2vw,1.05rem);color:var(--text-dark);margin-bottom:0.3rem}
+.benchmark-item-content p{font-size:clamp(0.8rem,1vw,0.88rem);color:var(--text-light);line-height:1.6}
+.deconstruction{padding:var(--gap-section) 0}
+.deconstruction-header{margin-bottom:var(--gap-content)}
+.steps-container{display:flex;flex-direction:column;gap:clamp(32px,4vw,56px);padding-left:60px;position:relative}
+.steps-container::before{content:"";position:absolute;left:22px;top:40px;bottom:40px;width:2px;border-left:2px dashed var(--yellow)}
+.step-item{position:relative}
+.step-num{position:absolute;left:-60px;width:44px;height:44px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:1rem;box-shadow:0 0 0 4px var(--cream)}
+.step-content{background:#fff;border-radius:12px;padding:clamp(24px,3vw,36px);box-shadow:0 2px 16px rgba(0,0,0,0.04)}
+.step-content h3{font-family:'Noto Serif SC',serif;font-weight:700;font-size:clamp(1.1rem,1.6vw,1.3rem);color:var(--text-dark);margin-bottom:0.8rem}
+.step-content h3 .step-tag{display:inline-block;font-family:'Fraunces',serif;font-size:0.7rem;letter-spacing:0.05em;color:var(--blue);background:rgba(108,155,207,0.08);padding:2px 10px;border-radius:4px;margin-left:6px;vertical-align:middle}
+.step-content p{font-size:clamp(0.82rem,1vw,0.9rem);color:var(--text-light);line-height:1.7;margin-bottom:0.5rem}
+.step-content .step-quote{margin-top:0.8rem;padding:12px 16px;border-left:3px solid var(--yellow);background:rgba(255,209,102,0.06);font-size:clamp(0.8rem,0.9vw,0.85rem);color:var(--text);font-style:normal;line-height:1.6}
+.dark-section{background:var(--dark);color:var(--dark-text);padding:clamp(60px,8vh,120px) 0;position:relative;overflow:hidden}
+.dark-section::before{content:"\201C";font-family:'Fraunces',serif;position:absolute;top:-40px;left:clamp(2rem,8vw,6rem);font-size:clamp(200px,30vw,400px);line-height:1;color:rgba(108,155,207,0.04);pointer-events:none}
+.dark-section .container{max-width:var(--max-w);margin:0 auto;padding:0 2rem}
+.dark-quote-wrap{max-width:820px;margin:0 auto}
+.dark-quote-label{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:1.5rem}
+.dark-quote-label::before{content:"";display:block;width:28px;height:2px;background:var(--yellow)}
+.dark-quote-text{font-family:'Noto Serif SC',serif;font-weight:600;font-size:clamp(1.2rem,2.5vw,1.8rem);line-height:1.6;color:#f0f2f5;margin-bottom:1.5rem}
+.dark-quote-source{display:flex;align-items:center;gap:12px;font-size:0.82rem;color:var(--lavender)}
+.dark-quote-source::before{content:"";width:24px;height:1px;background:rgba(173,185,207,0.3)}
+.dark-insights{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,2.5vw,32px);margin-top:clamp(40px,5vw,60px)}
+.dark-insight{padding:clamp(20px,2.5vw,32px);border:1px solid rgba(173,185,207,0.12);border-radius:12px;background:rgba(255,255,255,0.02)}
+.dark-insight-label{font-family:'Fraunces',serif;font-size:0.7rem;color:var(--yellow);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem}
+.dark-insight p{font-size:clamp(0.85rem,1vw,0.95rem);line-height:1.7;color:#c8ccd4}
+.section-accent{background:var(--blue);color:#fff;padding:clamp(80px,12vh,160px) 0;position:relative;overflow:hidden}
+.section-accent::before{content:"";position:absolute;top:-20%;right:-10%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.04);pointer-events:none}
+.section-accent::after{content:"";position:absolute;bottom:-10%;left:-5%;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.03);pointer-events:none}
+.section-accent .container{max-width:var(--max-w);margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+.section-accent .section-label{color:var(--yellow)}
+.section-accent .section-label::before{background:rgba(255,255,255,0.3)}
+.section-accent .section-title{color:#fff}
+.section-accent .section-subtitle{color:rgba(255,255,255,0.7)}
+.market-table-wrap{margin-top:var(--gap-content);overflow-x:auto;border-radius:12px;background:rgba(255,255,255,0.06)}
+.market-table{width:100%;min-width:640px;font-size:clamp(0.82rem,1vw,0.9rem)}
+.market-table thead th{font-family:'Noto Sans SC',sans-serif;font-weight:600;padding:clamp(14px,1.5vw,20px) clamp(16px,2vw,28px);text-align:left;border-bottom:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:clamp(0.72rem,0.9vw,0.82rem);letter-spacing:0.05em;text-transform:uppercase}
+.market-table tbody td{padding:clamp(14px,1.5vw,20px) clamp(16px,2vw,28px);border-bottom:1px solid rgba(255,255,255,0.06);line-height:1.6;color:rgba(255,255,255,0.85)}
+.market-table tbody tr:last-child td{border-bottom:none}
+.market-table tbody tr:hover{background:rgba(255,255,255,0.04)}
+.market-table .method-label{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(0.85rem,1vw,0.95rem);color:var(--yellow);white-space:nowrap}
+.summary{padding:var(--gap-section) 0;position:relative}
+.summary::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:clamp(60px,6vh,100px);background:linear-gradient(to bottom,var(--lavender),transparent)}
+.summary-inner{max-width:820px;margin:0 auto}
+.summary-label{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem}
+.summary-label::before{content:"";display:block;width:28px;height:2px;background:var(--yellow)}
+.summary h2{font-family:'Noto Serif SC',serif;font-weight:900;font-size:clamp(1.6rem,3.5vw,2.4rem);line-height:1.3;color:var(--text-dark);margin-bottom:clamp(24px,3vw,40px)}
+.summary-points{display:flex;flex-direction:column;gap:clamp(20px,2.5vw,36px)}
+.summary-point{padding:clamp(20px,2.5vw,32px);background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.03);position:relative;padding-left:clamp(56px,6vw,80px)}
+.summary-point-num{position:absolute;left:clamp(16px,2.5vw,32px);top:clamp(20px,2.5vw,32px);width:32px;height:32px;border-radius:50%;background:var(--yellow);color:var(--text-dark);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:0.85rem}
+.summary-point h3{font-family:'Noto Serif SC',serif;font-weight:600;font-size:clamp(1rem,1.3vw,1.1rem);color:var(--text-dark);margin-bottom:0.4rem}
+.summary-point h3 .summary-accent{color:var(--blue)}
+.summary-point p{font-size:clamp(0.82rem,1vw,0.9rem);color:var(--text-light);line-height:1.7}
+.summary-footer{margin-top:clamp(40px,5vw,60px);padding-top:clamp(24px,3vw,36px);border-top:1px solid rgba(173,185,207,0.2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.summary-footer p{font-size:0.78rem;color:var(--lavender);font-family:'Fraunces',serif;letter-spacing:0.03em}
+.summary-footer-brand{font-family:'Fraunces',serif;font-size:0.9rem;color:var(--blue);font-weight:600;font-style:italic}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding:5rem 2rem 3rem;gap:2rem}
+  .hero-text{padding-left:0}
+  .hero-visual{order:-1}
+  .hero-scroll{display:none}
+  .features-grid{grid-template-columns:1fr}
+  .benchmark{grid-template-columns:1fr;min-height:auto}
+  .benchmark-left{padding-bottom:0}
+  .benchmark-left .deco-number{display:none}
+  .steps-container{padding-left:44px}
+  .step-num{left:-44px;width:36px;height:36px;font-size:0.85rem}
+  .dark-insights{grid-template-columns:1fr}
+  .summary-footer{flex-direction:column;align-items:flex-start}
+  .section-accent .section-subtitle{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none}
+  .hero-deco-circle,.hero-deco-circle2{animation:none}
+  *,*::before,*::after{transition-duration:0.01ms!important;animation-duration:0.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-text reveal">
+    <div class="hero-label">Growth Strategy</div>
+    <h1>基于用户洞察的<br><span class="highlight">增长思路概述</span></h1>
+    <p>以暂停实验室为对标对象，拆解心理类产品的增长逻辑——信任传递而非流量拦截。</p>
+    <div class="hero-tags">
+      <span class="hero-tag">User Insights</span>
+      <span class="hero-tag">Growth Strategy</span>
+      <span class="hero-tag">Mental Health</span>
+    </div>
+    <p style="font-size:0.82rem;color:var(--lavender);border-left:2px solid var(--yellow);padding-left:16px;">
+      "用户不会因为看到一条广告就决定'试一下心理服务'——<br>决策门槛太高，信任成本太高。"
+    </p>
+  </div>
+  <div class="hero-visual reveal reveal-delay-2">
+    <div class="hero-deco-circle2"></div>
+    <div class="hero-deco-circle"></div>
+    <div class="hero-avatar-wrap">
+      <img src="avatar.jpg" alt="青未了">
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-line"></span>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<section class="judgment">
+  <div class="container">
+    <div class="judgment-header reveal">
+      <div class="section-label">Core Analysis</div>
+      <h2 class="section-title">对增长的判断</h2>
+      <p class="section-subtitle">心理类产品的增长和消费品或工具类产品有本质区别，核心是提高用户转化率而非纯曝光量。</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>目标用户</h3>
+        <p>受过良好教育、愿意为自我成长和情绪体验买单的青年群体——决策理性，对专业性的要求极高。</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3>宣传重点</h3>
+        <p>专业心理治疗背景、效果实验数据、价格优势（对比一对一咨询），结合心理领域热点话题如CPTSD。</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+        </div>
+        <h3>核心诉求</h3>
+        <p>提高客户转化率——内容驱动+合作分成，不依赖买量，找到用户真正有反应的内容表达方式。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="benchmark">
+  <div class="benchmark-left reveal">
+    <div class="deco-number">02</div>
+    <h2>对标<br>暂停实验室</h2>
+    <p class="benchmark-desc">用五年时间做到3.5万付费用户、42%续费率、68%完成率——一个值得深入拆解的增长范本。</p>
+  </div>
+  <div class="benchmark-right">
+    <div class="benchmark-item reveal reveal-delay-1">
+      <div class="benchmark-num">1</div>
+      <div class="benchmark-item-content">
+        <h4>科班背景 + 专业服务</h4>
+        <p>主创团队均来自心理专业，以专业心理干预方法为设计前提，效果经三个研究实验系统检验。</p>
+      </div>
+    </div>
+    <div class="benchmark-item reveal reveal-delay-2">
+      <div class="benchmark-num">2</div>
+      <div class="benchmark-item-content">
+        <h4>To C 业务为主</h4>
+        <p>面向普通用户而非企业客户，已验证了心理产品在C端市场的可行性和可持续性。</p>
+      </div>
+    </div>
+    <div class="benchmark-item reveal reveal-delay-3">
+      <div class="benchmark-num">3</div>
+      <div class="benchmark-item-content">
+        <h4>流程化服务</h4>
+        <p>不同于传统心理企业的培训和咨询模式，打造了真实、可复制的心理产品服务流程。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="deconstruction">
+  <div class="container">
+    <div class="deconstruction-header reveal">
+      <div class="section-label">Growth Logic</div>
+      <h2 class="section-title">暂停实验室的增长逻辑拆解</h2>
+      <p class="section-subtitle">从获客到裂变，拆解暂停实验室的增长飞轮如何运转。</p>
+    </div>
+    <div class="steps-container">
+      <div class="step-item reveal">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>用户是谁 + 为什么愿意来 <span class="step-tag">Acquisition</span></h3>
+          <p>暂停实验室的用户画像是清晰的：有情绪困扰但不到疾病程度、愿意为心理改善付费、但对一对一咨询的成本或可得性有顾虑的普通人。</p>
+          <p>这群人的特点是：已经意识到自己有情绪问题（有自我认知）、尝试过自助但觉得效果有限、被"专业"吸引。</p>
+          <div class="step-quote">内容获客的核心不是"引流"，而是"筛选"。暂停实验室的用户来自播客推荐、专家推荐——都是"信任传递"而非"流量拦截"。</div>
+        </div>
+      </div>
+      <div class="step-item reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>用户为什么愿意付费 + 为什么留下来 <span class="step-tag">Conversion &amp; Retention</span></h3>
+          <p>定价上采用单次付费模式，新人优惠200元。相比一对一咨询（通常300-800元/次），价格门槛显著更低。用户的心理账本是："花几百块试一下，损失可控"。</p>
+          <p>产品设计上，25天一个周期、每天10-20分钟，降低"坚持"的负担。68%完成率和42%续费率说明设计有效。</p>
+          <div class="step-quote">心理类产品的定价需要回答：用户为"尝试"愿意付多少钱，为"持续使用"愿意付多少钱。</div>
+        </div>
+      </div>
+      <div class="step-item reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>用户为什么愿意推荐 <span class="step-tag">Referral</span></h3>
+          <p>暂停实验室的裂变不是靠"分享得红包"，而是靠真实的用户效果和身份认同。80%用户报告困扰有所缓解——这种变化用户自己能感受到，也愿意跟朋友说。</p>
+          <p>"我在用暂停实验室"暗示"我在认真对待自己的心理健康"——这是一种值得分享的自我标签。</p>
+          <div class="step-quote">产品本身不能产生可感知的效果，任何裂变机制都无效。增长的前提是先确保用户在第一个周期内感受到变化。</div>
+        </div>
+      </div>
+      <div class="step-item reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>私域与内容运营的作用 <span class="step-tag">Community &amp; Content</span></h3>
+          <p>以公众号和微信群为主。发布科普内容和产品信息，群内用户交流和答疑。创始人和主创团队持续通过播客、B站输出专业内容。</p>
+          <p>一次内容生产可以反复触达不同渠道的用户，边际成本递减。社群运营专业且及时。</p>
+          <div class="step-quote">早期团队内容运营的核心不是"每天发什么"，而是"一次产出、多平台分发、持续积累"。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark-section">
+  <div class="container">
+    <div class="dark-quote-wrap reveal">
+      <div class="dark-quote-label">Key Insight</div>
+      <div class="dark-quote-text">如果产品本身不能产生可感知的效果，<br>任何增长技巧都无效。</div>
+      <div class="dark-quote-source">暂停实验室的五年验证</div>
+    </div>
+    <div class="dark-insights">
+      <div class="dark-insight reveal reveal-delay-1">
+        <div class="dark-insight-label">Acquisition</div>
+        <p>让内容出现在目标用户信任的渠道里，比追求阅读量更有效。找到信任的信源，以"被推荐"的方式出现。</p>
+      </div>
+      <div class="dark-insight reveal reveal-delay-2">
+        <div class="dark-insight-label">Growth Loop</div>
+        <p>有效果→愿意续费→续费后继续受益→更愿意推荐给别人。这是一个自然的正循环。</p>
+      </div>
+      <div class="dark-insight reveal reveal-delay-3">
+        <div class="dark-insight-label">Trust Transfer</div>
+        <p>"信任的人推荐→产生兴趣→尝试→有效→推荐给下一个"——信任传递的闭环。</p>
+      </div>
+      <div class="dark-insight reveal reveal-delay-4">
+        <div class="dark-insight-label">Content Matrix</div>
+        <p>一次产出、多平台分发、持续积累。创始人亲自输出内容，比外包写稿更能建立信任。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-accent">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Growth Methods</div>
+      <h2 class="section-title">可迁移的增长方法</h2>
+      <p class="section-subtitle">从暂停实验室的实践中提炼出可复用的增长逻辑，供早期心理产品对标参考。</p>
+    </div>
+    <div class="market-table-wrap reveal reveal-delay-1">
+      <table class="market-table">
+        <thead>
+          <tr>
+            <th>增长环节</th>
+            <th>暂停实验室的做法</th>
+            <th>可迁移的逻辑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="method-label">Acquisition</span> 获客</td>
+            <td>播客推荐、专家推荐、B站UP主推荐</td>
+            <td>找到目标用户信任的信源，以"被推荐"的方式出现，而非自建流量</td>
+          </tr>
+          <tr>
+            <td><span class="method-label">Conversion</span> 转化</td>
+            <td>单次付费+新人优惠，降低尝试门槛</td>
+            <td>首次付费门槛要低，让用户"试一下"的心理成本可控</td>
+          </tr>
+          <tr>
+            <td><span class="method-label">Referral</span> 裂变</td>
+            <td>用户因真实效果和身份认同而自然推荐</td>
+            <td>裂变的前提是"效果可感知"——同时可设计利于分享的海报</td>
+          </tr>
+          <tr>
+            <td><span class="method-label">Content</span> 内容</td>
+            <td>公众号+播客+B站+小红书多平台分发</td>
+            <td>一次产出、多平台分发，创始人/主创亲自输出建立信任</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="summary">
+  <div class="container">
+    <div class="summary-inner">
+      <div class="reveal">
+        <div class="summary-label">Conclusion</div>
+        <h2>暂停实验室验证了什么</h2>
+      </div>
+      <div class="summary-points">
+        <div class="summary-point reveal reveal-delay-1">
+          <div class="summary-point-num">1</div>
+          <h3>增长的前提是产品能产生<span class="summary-accent">可感知的效果</span></h3>
+          <p>用户愿意付费、愿意续费、愿意推荐，都是建立在"真的有用"之上的。68%的完成率和42%的续费率不是运营技巧能换来的，是产品设计本身在起作用。</p>
+        </div>
+        <div class="summary-point reveal reveal-delay-2">
+          <div class="summary-point-num">2</div>
+          <h3>获客的本质是<span class="summary-accent">"信任传递"</span>而非"流量获取"</h3>
+          <p>暂停实验室的用户来自播客推荐、专家推荐、朋友推荐——这些都是信任链条的延伸。对于没有投放预算的早期团队，找到目标用户信任的信源、以"被推荐"的方式出现，比自己做内容引流更高效。</p>
+        </div>
+      </div>
+      <div class="summary-footer reveal reveal-delay-3">
+        <p>基于用户洞察的增长思路概述 · 以暂停实验室为对标对象</p>
+        <span class="summary-footer-brand">✦ Qingweiliao</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const observer=new IntersectionObserver(e=>{e.forEach(n=>{n.isIntersecting&&(n.target.classList.add("visible"),n.target.closest("[class*='reveal-delay']")||n.target.parentElement?.querySelector("[class*='reveal-delay']")||observer.unobserve(n.target))})},{threshold:.08,rootMargin:"0px 0px -40px 0px"});
+document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
+document.querySelectorAll(".features-grid,.benchmark-right,.steps-container,.dark-insights,.summary-points").forEach(p=>{const c=p.querySelectorAll(".reveal");let r=0;const o=new IntersectionObserver(e=>{e.forEach(n=>{n.isIntersecting&&(n.target.classList.add("visible"),r++,o.unobserve(n.target))})},{threshold:.08,rootMargin:"0px 0px -40px 0px"});c.forEach(e=>o.observe(e))});
+window.matchMedia("(prefers-reduced-motion: reduce)").matches&&document.querySelectorAll(".reveal").forEach(e=>e.classList.add("visible"));
+</script>
+</body>
+</html>
